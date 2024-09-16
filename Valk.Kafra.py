@@ -1,11 +1,11 @@
 from tkinter import *
 import sqlite3
 
-# Conectando ao banco de dados SQLite diretamente
+# banco de dados SQLite diretamente
 conexao = sqlite3.connect('Estoque.db')
 cursor = conexao.cursor()
 
-# Criando a tabela Estoque se não existir
+# Criando a tabela 
 cursor.execute('''
 CREATE TABLE IF NOT EXISTS Estoque (
     ID INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -17,17 +17,17 @@ CREATE TABLE IF NOT EXISTS Estoque (
 
 conexao.commit()
 
-############### Função para configurar o GIF em qualquer janela ###############
+###Função para configurar o GIF 
 
 def configurar_background(janela, largura, altura, gif_path, total_frames):
     canvas = Canvas(janela, bg="#ffffff", height=altura, width=largura, bd=0, highlightthickness=0, relief="ridge")
     canvas.place(x=0, y=0)
     background_img = PhotoImage(file=gif_path)
     background = canvas.create_image(largura // 2, altura // 2, image=background_img)
-    janela.background_img = background_img  # Para manter a referência ao gif
+    janela.background_img = background_img  
     return canvas, background, background_img, total_frames
 
-############### Função para loop do GIF ###############
+### Função para loop do GIF 
 
 def update_gif(janela, canvas, background, background_img, total_frames, frame_count=0):
     try:
@@ -38,8 +38,7 @@ def update_gif(janela, canvas, background, background_img, total_frames, frame_c
         frame_count = 0
     janela.after(100, update_gif, janela, canvas, background, background_img, total_frames, frame_count)
 
-############### Funções para criar janelas ###############
-
+### Funções para criar janelas
 def adicionar_na_segunda_janela():
     def confirmar_adicao():
         nome = nome_insumo_sec.get()
@@ -60,7 +59,8 @@ def adicionar_na_segunda_janela():
     segunda_janela.geometry("400x300")
     segunda_janela.title("Adicionar Produto")
     
-    canvas, background, background_img, total_frames = configurar_background(segunda_janela, 400, 300, "janela/background_topdown.gif", 0) ### GIF ta bugando #####
+    ### Desisti de consertar esse GIF Então zerei os frames para não bugar a animação ###
+    canvas, background, background_img, total_frames = configurar_background(segunda_janela, 400, 300, "background_topdown.gif", 0)
     segunda_janela.after(0, update_gif, segunda_janela, canvas, background, background_img, total_frames)
 
     Label(segunda_janela, text="Nome do Produto:").pack()
@@ -91,8 +91,9 @@ def deletar_na_segunda_janela():
     segunda_janela = Toplevel(window)
     segunda_janela.geometry("400x200")
     segunda_janela.title("Deletar Produto")
-    
-    canvas, background, background_img, total_frames = configurar_background(segunda_janela, 400, 200, "janela/background_topdown.gif", 0) ### GIF ta bugando #####
+
+    ### Desisti de consertar esse GIF Então zerei os frames para não bugar a animação ###
+    canvas, background, background_img, total_frames = configurar_background(segunda_janela, 400, 200, "background_topdown.gif", 0)
     segunda_janela.after(0, update_gif, segunda_janela, canvas, background, background_img, total_frames)
 
     Label(segunda_janela, text="Nome do Produto:").pack()
@@ -120,8 +121,8 @@ def consumir_na_segunda_janela():
     segunda_janela = Toplevel(window)
     segunda_janela.geometry("400x300")
     segunda_janela.title("Consumir Produto")
-    
-    canvas, background, background_img, total_frames = configurar_background(segunda_janela, 400, 300, "janela/background_topdown.gif", 0) ### GIF ta bugando #####
+    ### Desisti de consertar esse GIF Então zerei os frames para não bugar a animação ###
+    canvas, background, background_img, total_frames = configurar_background(segunda_janela, 400, 300, "background_topdown.gif", 0) 
     segunda_janela.after(0, update_gif, segunda_janela, canvas, background, background_img, total_frames)
 
     Label(segunda_janela, text="Nome do Produto:").pack()
@@ -165,7 +166,8 @@ Conta: {conta}
     segunda_janela.geometry("400x200")
     segunda_janela.title("Procurar Produto")
     
-    canvas, background, background_img, total_frames = configurar_background(segunda_janela, 400, 200, "janela/background_topdown.gif", 0) ### GIF ta bugando #####
+    ### Desisti de consertar esse GIF Então zerei os frames para não bugar a animação ###
+    canvas, background, background_img, total_frames = configurar_background(segunda_janela, 400, 200, "background_topdown.gif", 0) 
     segunda_janela.after(0, update_gif, segunda_janela, canvas, background, background_img, total_frames)
 
     Label(segunda_janela, text="Nome do Produto:").pack()
@@ -174,18 +176,18 @@ Conta: {conta}
 
     Button(segunda_janela, text="Confirmar", command=confirmar_procurar).pack()
 
-############### Janela principal do tkinter ###############
+### Janela principal
 
 window = Tk()
 
 window.geometry("769x690")
 window.configure(bg="#ffffff")
-canvas, background, background_img, total_frames = configurar_background(window, 769, 690, "janela/background.gif", 9)
+canvas, background, background_img, total_frames = configurar_background(window, 769, 690, "background.gif", 9)
 window.after(0, update_gif, window, canvas, background, background_img, total_frames)
 
 ######## Botões
 
-img0 = PhotoImage(file=f"janela/img0.png")
+img0 = PhotoImage(file=f"img0.png")
 b0 = Button(
     image=img0,
     borderwidth=0,
@@ -198,7 +200,7 @@ b0.place(
     width=178,
     height=54)
 
-img1 = PhotoImage(file=f"janela/img1.png")
+img1 = PhotoImage(file=f"img1.png")
 b1 = Button(
     image=img1,
     borderwidth=0,
@@ -211,7 +213,7 @@ b1.place(
     width=178,
     height=54)
 
-img2 = PhotoImage(file=f"janela/img2.png")
+img2 = PhotoImage(file=f"img2.png")
 b2 = Button(
     image=img2,
     borderwidth=0,
@@ -224,7 +226,7 @@ b2.place(
     width=178,
     height=54)
 
-img3 = PhotoImage(file=f"janela/img3.png")
+img3 = PhotoImage(file=f"img3.png")
 b3 = Button(
     image=img3,
     borderwidth=0,
@@ -237,10 +239,10 @@ b3.place(
     width=178,
     height=54)
 
-######## Caixa de texto para exibir o resultado
+### Caixa de texto para exibir o resultado
 
 caixa_texto = Text(window, height=20, width=70)
-caixa_texto.place(x=50, y=300)
+caixa_texto.place(x=100, y=330)
 
 window.resizable(False, False)
 window.mainloop()
