@@ -78,15 +78,29 @@ def adicionar_na_segunda_janela():
     Button(segunda_janela, text="Confirmar", command=confirmar_adicao).pack()
 
 def deletar_na_segunda_janela():
+    def abrir_terceira_janela(nome):
+        def confirmar_terceira():
+            cursor.execute('DELETE FROM Estoque WHERE Produto = ?', (nome,))
+            conexao.commit()
+            caixa_texto.delete("1.0", END)
+            caixa_texto.insert("1.0", f"Item {nome} deletado!")
+            terceira_janela.destroy()
+            segunda_janela.destroy()
+
+        def cancelar_terceira():
+            terceira_janela.destroy()
+
+        terceira_janela = Toplevel(segunda_janela)
+        terceira_janela.geometry("400x200")
+        terceira_janela.title("Confirmar Exclusão")
+        
+        Label(terceira_janela, text=f"Você tem certeza que deseja deletar '{nome}' permanentemente?").pack()
+        Button(terceira_janela, text="Sim", command=confirmar_terceira).pack(side=LEFT, padx=100)
+        Button(terceira_janela, text="Não", command=cancelar_terceira).pack(side=LEFT, padx=0)
+
     def confirmar_delecao():
         nome = nome_insumo_sec.get()
-
-        cursor.execute('DELETE FROM Estoque WHERE Produto = ?', (nome,))
-        conexao.commit()
-
-        caixa_texto.delete("1.0", END)
-        caixa_texto.insert("1.0", f"Item {nome} deletado!")
-        segunda_janela.destroy()
+        abrir_terceira_janela(nome)
 
     segunda_janela = Toplevel(window)
     segunda_janela.geometry("400x200")
@@ -120,7 +134,7 @@ def consumir_na_segunda_janela():
 
     segunda_janela = Toplevel(window)
     segunda_janela.geometry("400x300")
-    segunda_janela.title("Consumir Produto")
+    segunda_janela.title("Atualizar Registro")
     ### Desisti de consertar esse GIF Então zerei os frames para não bugar a animação ###
     canvas, background, background_img, total_frames = configurar_background(segunda_janela, 400, 300, "background_topdown.gif", 0) 
     segunda_janela.after(0, update_gif, segunda_janela, canvas, background, background_img, total_frames)
@@ -129,21 +143,28 @@ def consumir_na_segunda_janela():
     nome_insumo_sec = Entry(segunda_janela)
     nome_insumo_sec.pack()
 
-    Label(segunda_janela, text="Conta:").pack()
-    conta_insumo_sec = Entry(segunda_janela)
-    conta_insumo_sec.pack()
-
     Label(segunda_janela, text="Quantidade:").pack()
     qtde_insumo_sec = Entry(segunda_janela)
     qtde_insumo_sec.pack()
+
+    Label(segunda_janela, text="Conta:").pack()
+    conta_insumo_sec = Entry(segunda_janela)
+    conta_insumo_sec.pack()
 
     Button(segunda_janela, text="Confirmar", command=confirmar_consumo).pack()
 
 def procurar_na_segunda_janela():
     def confirmar_procurar():
         nome = nome_insumo_sec.get()
+        conta = conta_insumo_sec.get()
 
-        cursor.execute('SELECT * FROM Estoque WHERE Produto = ?', (nome,))
+        if nome and conta:
+            cursor.execute('SELECT * FROM Estoque WHERE Produto LIKE ? AND Conta = ?', (f'%{nome}%', conta))
+        elif nome:
+            cursor.execute('SELECT * FROM Estoque WHERE Produto LIKE ?', (f'%{nome}%',))
+        elif conta:
+            cursor.execute('SELECT * FROM Estoque WHERE Conta = ?', (conta,))
+
         valores = cursor.fetchall()
 
         if valores:
@@ -173,6 +194,10 @@ Conta: {conta}
     Label(segunda_janela, text="Nome do Produto:").pack()
     nome_insumo_sec = Entry(segunda_janela)
     nome_insumo_sec.pack()
+
+    Label(segunda_janela, text="Conta:").pack()
+    conta_insumo_sec = Entry(segunda_janela)
+    conta_insumo_sec.pack()
 
     Button(segunda_janela, text="Confirmar", command=confirmar_procurar).pack()
 
@@ -222,7 +247,7 @@ b2 = Button(
     relief="flat")
 
 b2.place(
-    x=329, y=107,
+    x=337, y=107,
     width=178,
     height=54)
 
@@ -235,14 +260,13 @@ b3 = Button(
     relief="flat")
 
 b3.place(
-    x=329, y=196,
+    x=337, y=196,
     width=178,
     height=54)
 
-### Caixa de texto para exibir o resultado
-
-caixa_texto = Text(window, height=20, width=70)
-caixa_texto.place(x=100, y=330)
+### Caixa de Texto para Retorno
+caixa_texto = Text(window, bd=0, bg="white", highlightthickness=0)
+caixa_texto.place(x=29, y=330, width=711, height=310)
 
 window.resizable(False, False)
 window.mainloop()
