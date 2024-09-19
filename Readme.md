@@ -1,8 +1,40 @@
- -- Trabalho de Extensão da Materia de Banco de dados da Estacio. --
+<h1 align="center">
+📄<br>Valk Kafra - Sistema de Gerenciamento de Inventários para Ragnarok Online
+</h1>
 
-Aplicativo desenvolvido no intuito de ser usado no jogo Ragnarok, mas não exclusivamente, e pela comunidade, de codigo aberto e acessivel a todos.
+***  Índice ***
+* [Descrição do Projeto](#descrição-do-projeto)
+* [Pré requisitos](#pré-requisitos)
+* [Execução](#execução)
+* [Bibliotecas](#bibliotecas)
 
- Este app serve principalmente para fazer o gerenciamento de itens de multiplas contas, permitindo o registro de itens, adição e remoção de itens para conseguir saber em qual conta esta o item, com uma busca rapida, poupando o trabalho de abrir multiplas contas.
+# Descrição do Projeto
+> Este repositorio foi criado inicialmente como um trabalho de extensão para a materia de Banco de Dados na Estacio.
 
+ O Valk Kafra foi desenvolvido para facilitar a gestão de itens em múltiplas contas de jogadores de Ragnarok Online, possibilitando que todos os inventários sejam gerenciados em um único sistema. Com isso, elimina-se a necessidade de abrir cada conta individualmente para verificar os itens, otimizando o tempo e aumentando a eficiência do gerenciamento.
+ O codigo e de uso livre, não comercial.
 
- Aplicativo feito em Python e usando a SQLITE3 para facilitar para que qualquer um possa usar o aplicativo, sem necessidade de baixar driver de um banco de dados expecifico, nem mesmo de uma configuração previa.
+ ## Pré requisitos
+ >Para executar diretamento o codigo.
+ * Sistema operacional Windows
+ *  IDE de python (ambiente de desenvolvimento integrado de python)
+ *  Biblioteca Tkinter e SQLite.
+
+>Para somente usar o aplicativo, baixar o Valk Kafra.rar
+
+ *  Winrar e afins (Ou windows 11 que lhe permita extrair arquivos .rar)
+
+## Execução
+
+Ao executar o codigo ou o aplicativo, uma janela e aberta, com botões interativos, os seguintes botões, *Adicionar, *Deletar, *Atualizar e *Procurar.
+>Funções detalhadas dos botões.
+
+*<strong>ADICIONAR:</strong> Abre uma janela, para inserção das informações referentes a "Nome do Produto"(referente ao item), Quantidade (referente a quantidade de tal item) e a conta (a qual esse item pertence ou esta no momento).<br>
+*<strong>DELETAR:</strong> Abre uma janela para a inserção do nome do item a ser deletado (essa função deleta o item de todas as contas ao mesmo tempo).<br>
+*<strong>ATUALIZAR:</strong> Abre uma janela para a remoção de uma quantidade a expecifica de um item em uma conta expecifica /// Necessita de mais atualizações em cod.<br>
+*<strong>PROCURAR:</strong> Abre uma janela para procurar algo no Database do que ja foi inserido, podendo fazer a busca por nome, parte do nome ou por conta.<br>
+
+## Bibliotecas
+* <strong>tkinter:</strong> biblioteca de criação de sistemas interativos (janelas)<br>
+* <strong>sqlite3:</strong> bibliotecas de banco de dados localmente<br>
+* <strong>cx_freeze:</strong> bibliotecas usado para criar um arquivo executavel para o setup.py<br>
