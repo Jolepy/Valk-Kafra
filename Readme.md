@@ -2,7 +2,7 @@
 📄<br>Valk Kafra - Sistema de Gerenciamento de Inventários para Ragnarok Online
 </h1>
 
-***  Índice ***
+***  Índice  ***
 * [Descrição do Projeto](#descrição-do-projeto)
 * [Pré requisitos](#pré-requisitos)
 * [Execução](#execução)
