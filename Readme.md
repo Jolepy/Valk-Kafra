@@ -30,9 +30,11 @@ Ao executar o codigo ou o aplicativo, uma janela e aberta, com botões interativ
 >Funções detalhadas dos botões.
 
 *<strong>ADICIONAR:</strong> Abre uma janela, para inserção das informações referentes a "Nome do Produto"(referente ao item), Quantidade (referente a quantidade de tal item) e a conta (a qual esse item pertence ou esta no momento).<br>
-*<strong>DELETAR:</strong> Abre uma janela para a inserção do nome do item a ser deletado (essa função deleta o item de todas as contas ao mesmo tempo).<br>
-*<strong>ATUALIZAR:</strong> Abre uma janela para a remoção de uma quantidade a expecifica de um item em uma conta expecifica /// Necessita de mais atualizações em cod.<br>
+*<strong>DELETAR:</strong> Abre uma janela para a inserção do nome do item a ser deletado, o item precisa ser escrito por inteiro, da mesma forma que esta no banco de dados, essa função deleta o item de todas as contas ao mesmo tempo.<br>
+*<strong>ATUALIZAR:</strong> Abre uma janela para a remoção de uma quantidade a expecifica de um item em uma conta expecifica, e necessario colocar o nome completo e a conta para adicionar ou remover uma quantidade de itens, para remover colocar um valor negativo (exemplo -2), para adicionar não e necessario nenhum acrescimo.<br>
 *<strong>PROCURAR:</strong> Abre uma janela para procurar algo no Database do que ja foi inserido, podendo fazer a busca por nome, parte do nome ou por conta.<br>
+
+>setup.py seria para criar um arquivo executavel de forma facil usando cx_freeze.
 
 ## Bibliotecas
 * <strong>tkinter:</strong> biblioteca de criação de sistemas interativos (janelas)<br>
