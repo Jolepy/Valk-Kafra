@@ -1,11 +1,11 @@
 from tkinter import *
 import sqlite3
 
-# banco de dados SQLite diretamente
+# Conexão com o banco de dados SQLite
 conexao = sqlite3.connect('Estoque.db')
 cursor = conexao.cursor()
 
-# Criando a tabela 
+# Criando a tabela se não existir
 cursor.execute('''
 CREATE TABLE IF NOT EXISTS Estoque (
     ID INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS Estoque (
 
 conexao.commit()
 
-###Função para configurar o GIF 
+### Função para configurar o GIF
 
 def configurar_background(janela, largura, altura, gif_path, total_frames):
     canvas = Canvas(janela, bg="#ffffff", height=altura, width=largura, bd=0, highlightthickness=0, relief="ridge")
@@ -59,7 +59,6 @@ def adicionar_na_segunda_janela():
     segunda_janela.geometry("400x300")
     segunda_janela.title("Adicionar Produto")
     
-    ### Desisti de consertar esse GIF Então zerei os frames para não bugar a animação ###
     canvas, background, background_img, total_frames = configurar_background(segunda_janela, 400, 300, "background_topdown.gif", 0)
     segunda_janela.after(0, update_gif, segunda_janela, canvas, background, background_img, total_frames)
 
@@ -106,7 +105,6 @@ def deletar_na_segunda_janela():
     segunda_janela.geometry("400x200")
     segunda_janela.title("Deletar Produto")
 
-    ### Desisti de consertar esse GIF Então zerei os frames para não bugar a animação ###
     canvas, background, background_img, total_frames = configurar_background(segunda_janela, 400, 200, "background_topdown.gif", 0)
     segunda_janela.after(0, update_gif, segunda_janela, canvas, background, background_img, total_frames)
 
@@ -123,19 +121,18 @@ def consumir_na_segunda_janela():
         qtde = qtde_insumo_sec.get()
 
         cursor.execute('''
-        UPDATE Estoque SET Quantidade = Quantidade - ?
+        UPDATE Estoque SET Quantidade = Quantidade + ?
         WHERE Produto = ? AND Conta = ?
         ''', (qtde, nome, conta))
         conexao.commit()
 
         caixa_texto.delete("1.0", END)
-        caixa_texto.insert("1.0", f"Item {nome} consumido em {qtde} unidades!")
+        caixa_texto.insert("1.0", f"Item {nome} atualizado em {qtde} unidades!")
         segunda_janela.destroy()
 
     segunda_janela = Toplevel(window)
     segunda_janela.geometry("400x300")
     segunda_janela.title("Atualizar Registro")
-    ### Desisti de consertar esse GIF Então zerei os frames para não bugar a animação ###
     canvas, background, background_img, total_frames = configurar_background(segunda_janela, 400, 300, "background_topdown.gif", 0) 
     segunda_janela.after(0, update_gif, segunda_janela, canvas, background, background_img, total_frames)
 
@@ -143,7 +140,7 @@ def consumir_na_segunda_janela():
     nome_insumo_sec = Entry(segunda_janela)
     nome_insumo_sec.pack()
 
-    Label(segunda_janela, text="Quantidade:").pack()
+    Label(segunda_janela, text="Quantidade (Use número negativo para remover)").pack()
     qtde_insumo_sec = Entry(segunda_janela)
     qtde_insumo_sec.pack()
 
@@ -187,7 +184,6 @@ Conta: {conta}
     segunda_janela.geometry("400x200")
     segunda_janela.title("Procurar Produto")
     
-    ### Desisti de consertar esse GIF Então zerei os frames para não bugar a animação ###
     canvas, background, background_img, total_frames = configurar_background(segunda_janela, 400, 200, "background_topdown.gif", 0) 
     segunda_janela.after(0, update_gif, segunda_janela, canvas, background, background_img, total_frames)
 
@@ -264,9 +260,20 @@ b3.place(
     width=178,
     height=54)
 
-### Caixa de Texto para Retorno
-caixa_texto = Text(window, bd=0, bg="white", highlightthickness=0)
-caixa_texto.place(x=29, y=330, width=711, height=310)
+######## Caixa de texto para exibir resultados
+caixa_texto = Text(
+    window,
+    bd=0,
+    bg="#d9d9d9",
+    highlightthickness=0)
+
+caixa_texto.place(
+    x=29, y=330,
+    width=711,
+    height=310)
 
 window.resizable(False, False)
 window.mainloop()
+
+# Fechando a conexão com o banco de dados
+conexao.close()

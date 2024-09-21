@@ -20,7 +20,7 @@ icon_path = 'Valk_Kafra.ico'
 # Informações do executável
 setup(
     name="Valk Kafra",
-    version="1.4",
+    version="1.5b2",
     description="Aplicativo de controle de itens usando SQLITE",
     options={"build_exe": {"include_files": files}},
     executables=[Executable("Valk.Kafra.py", base="Win32GUI", icon=icon_path)]
