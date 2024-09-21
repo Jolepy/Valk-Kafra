@@ -9,13 +9,20 @@
 * [Bibliotecas](#bibliotecas)
 
 # Descrição do Projeto
+<<<<<<< HEAD
 > Este repositorio foi criado inicialmente como um trabalho de extensão para a materia de Banco de Dados na Estacio. 
+=======
+> Este repositorio foi criado inicialmente como um trabalho de extensão para a materia de Banco de Dados na Estacio.
+>>>>>>> eb1d1442c64f33ef9451693b9d92cc5faf5cf97b
 
  O Valk Kafra foi desenvolvido para facilitar a gestão de itens em múltiplas contas de jogadores de Ragnarok Online, possibilitando que todos os inventários sejam gerenciados em um único sistema. Com isso, elimina-se a necessidade de abrir cada conta individualmente para verificar os itens, otimizando o tempo e aumentando a eficiência do gerenciamento.
  O codigo e de uso livre, não comercial.
 
+<<<<<<< HEAD
 > Pasta Valk Kafra esta o .rar com o executavel e os arquivos necessarios para o aplicativo.
 
+=======
+>>>>>>> eb1d1442c64f33ef9451693b9d92cc5faf5cf97b
  ## Pré requisitos
  >Para executar diretamento o codigo.
  * Sistema operacional Windows
@@ -41,4 +48,8 @@ Ao executar o codigo ou o aplicativo, uma janela e aberta, com botões interativ
 ## Bibliotecas
 * <strong>tkinter:</strong> biblioteca de criação de sistemas interativos (janelas)<br>
 * <strong>sqlite3:</strong> bibliotecas de banco de dados localmente<br>
+<<<<<<< HEAD
 * <strong>cx_freeze:</strong> bibliotecas usado para criar um arquivo executavel para o setup.py<br>
+=======
+* <strong>cx_freeze:</strong> bibliotecas usado para criar um arquivo executavel para o setup.py<br>
+>>>>>>> eb1d1442c64f33ef9451693b9d92cc5faf5cf97b
